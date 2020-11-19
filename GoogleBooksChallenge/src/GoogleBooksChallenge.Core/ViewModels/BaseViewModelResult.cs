@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace GoogleBooksChallenge.Core.ViewModels
@@ -9,6 +10,11 @@ namespace GoogleBooksChallenge.Core.ViewModels
     public abstract class BaseViewModelResult<TResult> : BaseViewModel, IMvxViewModelResult<TResult>
         where TResult : notnull
     {
+        public BaseViewModelResult(IMvxNavigationService navigationService) : base(navigationService)
+        {
+
+        }
+
         public TaskCompletionSource<object> CloseCompletionSource { get; set; }
 
         public override void ViewDestroy(bool viewFinishing = true)

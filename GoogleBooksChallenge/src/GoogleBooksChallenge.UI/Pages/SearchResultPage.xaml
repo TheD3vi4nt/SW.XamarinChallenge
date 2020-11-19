@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage
+    x:Class="GoogleBooksChallenge.UI.Pages.SearchResultPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:GoogleBooksChallenge.UI.Pages"
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+    xmlns:viewModels="clr-namespace:GoogleBooksChallenge.Core.ViewModels.Books;assembly=GoogleBooksChallenge.Core"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    Title="Google Books Challenge"
+    x:TypeArguments="viewModels:SearchResultViewModel">
+    <ContentPage.Content>
+        <StackLayout Margin="16" Spacing="8">
+            <Label
+                FontAttributes="Bold"
+                FontSize="Title"
+                HorizontalOptions="CenterAndExpand"
+                Text="Google Books API"
+                VerticalOptions="Start" />
+            <CollectionView
+                x:Name="QueryItemsList"
+                Margin="0,16"
+                BackgroundColor="Transparent"
+                ItemsSource="{Binding QueryItems}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="20" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                            BackgroundColor="#f74b50"
+                            CornerRadius="16"
+                            HasShadow="False">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Image
+                                    Grid.Column="0"
+                                    Grid.RowSpan="2"
+                                    HorizontalOptions="Start"
+                                    Source="{Binding VolumeInfo.ImageLinks.Thumbnail}" />
+                                <Label
+                                    Grid.Column="1"
+                                    Grid.Row="0"
+                                    FontAttributes="Bold"
+                                    FontSize="Medium"
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding VolumeInfo.Title}" />
+                                <CollectionView
+                                    Grid.Column="1"
+                                    Grid.Row="1"
+                                    Margin="16"
+                                    IsVisible="false"
+                                    VerticalOptions="Start"
+                                    BackgroundColor="Red"
+                                    ItemsSource="{Binding VolumeInfo.Authors}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout>
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="Medium"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding}" />
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                    <CollectionView.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding VolumeInfo.Authors, TargetNullValue=''}"
+                                            TargetType="CollectionView"
+                                            Value="">
+                                            <Setter Property="IsVisible" Value="false" />
+                                        </DataTrigger>
+                                    </CollectionView.Triggers>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</views:MvxContentPage>

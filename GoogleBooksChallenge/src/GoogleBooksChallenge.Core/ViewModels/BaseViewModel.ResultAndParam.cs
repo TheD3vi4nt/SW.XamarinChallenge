@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace GoogleBooksChallenge.Core.ViewModels
@@ -9,6 +10,10 @@ namespace GoogleBooksChallenge.Core.ViewModels
         where TParameter : notnull
         where TResult : notnull
     {
+        public BaseViewModel(IMvxNavigationService navigationService) : base(navigationService)
+        {
+
+        }
         public abstract void Prepare(TParameter parameter);
     }
 }

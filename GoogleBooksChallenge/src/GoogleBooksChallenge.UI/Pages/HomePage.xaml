@@ -1,18 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<views:MvxContentPage x:TypeArguments="viewModels:HomeViewModel"
+<views:MvxContentPage
+    x:Class="GoogleBooksChallenge.UI.Pages.HomePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-    xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
     xmlns:local="clr-namespace:GoogleBooksChallenge.UI.Pages"
-    x:Class="GoogleBooksChallenge.UI.Pages.HomePage"
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
     xmlns:viewModels="clr-namespace:GoogleBooksChallenge.Core.ViewModels.Home;assembly=GoogleBooksChallenge.Core"
-                      Title="Main page">
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    Title="Google Books Challenge"
+    x:TypeArguments="viewModels:HomeViewModel">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome!!&#10;App scaffolded with MvxScaffolding"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="16,40,16,16" Spacing="8">
+            <Label
+                HorizontalOptions="CenterAndExpand"                
+                FontSize="Title"
+                FontAttributes="Bold"
+                Text="Google Books API"
+                VerticalOptions="Start" />
+            <Entry Placeholder="Enter text query" Text="{Binding TextQuery}"></Entry>
+            <Button Text="Search" Margin="16" Command="{Binding SearchBooksCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>
