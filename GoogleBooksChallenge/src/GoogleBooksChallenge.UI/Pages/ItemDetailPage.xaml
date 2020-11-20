@@ -8,7 +8,6 @@
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
     xmlns:viewModels="clr-namespace:GoogleBooksChallenge.Core.ViewModels.Books;assembly=GoogleBooksChallenge.Core"
     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-    Title="Search results for"
     x:TypeArguments="viewModels:ItemDetailViewModel">
     <ContentPage.Content>
         <ScrollView>
@@ -20,8 +19,7 @@
                     HasShadow="False">
                     <StackLayout>
                         <ffimage:CachedImage
-                            Margin="0,0,0,8"
-                            Aspect="AspectFit"                           
+                            Aspect="AspectFit"
                             ErrorPlaceholder="ic_book"
                             FadeAnimationEnabled="True"
                             HeightRequest="250"
@@ -37,10 +35,15 @@
                                     <Setter Property="Source" Value="ic_book" />
                                 </DataTrigger>
                             </ffimage:CachedImage.Triggers>
-                            <ffimage:CachedImage.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BookReaderCommand}" CommandParameter="{Binding SelectedItem}"></TapGestureRecognizer>
-                            </ffimage:CachedImage.GestureRecognizers>
                         </ffimage:CachedImage>
+                        <Button
+                            Margin="16,0,16,16"
+                            Command="{Binding BookReaderCommand}"
+                            CommandParameter="{Binding SelectedItem}"
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            HorizontalOptions="Center"
+                            Text="Book reader" />
                         <Label
                             FontAttributes="Bold"
                             FontSize="Title"

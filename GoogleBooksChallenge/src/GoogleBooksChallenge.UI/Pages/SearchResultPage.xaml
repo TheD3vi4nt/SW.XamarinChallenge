@@ -15,6 +15,7 @@
             <CollectionView
                 x:Name="QueryItemsList"
                 BackgroundColor="Transparent"
+                VerticalOptions="FillAndExpand"
                 ItemsSource="{Binding QueryItems}"
                 RemainingItemsThreshold="{Binding ItemTreshold}"
                 RemainingItemsThresholdReachedCommand="{Binding RemainingItemsThresholdReachedCommand}"
@@ -105,13 +106,13 @@
                                 </Frame.GestureRecognizers>
                             </Frame>
                         </ContentView>
-
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <ActivityIndicator
                 HeightRequest="50"
                 HorizontalOptions="Center"
+                IsVisible="{Binding IsBusy}"
                 IsRunning="{Binding IsBusy}"
                 VerticalOptions="Center"
                 WidthRequest="50" />
