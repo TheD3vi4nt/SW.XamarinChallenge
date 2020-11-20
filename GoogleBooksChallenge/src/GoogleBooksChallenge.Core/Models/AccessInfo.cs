@@ -8,6 +8,6 @@ namespace GoogleBooksChallenge.Core.Models
     public class AccessInfo
     {
         [JsonProperty("webReaderLink")]
-        public Uri WebReaderLink { get; set; }
+        public string WebReaderLink { get; set; }
     }
 }

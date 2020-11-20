@@ -4,22 +4,37 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:GoogleBooksChallenge.UI.Controls"
-    xmlns:cookie="clr-namespace:Cookies;assembly=Cookies"
+    xmlns:hybrid="clr-namespace:Xam.Plugin.WebView.Abstractions;assembly=Xam.Plugin.WebView.Abstractions"
     xmlns:viewModels="clr-namespace:GoogleBooksChallenge.Core.ViewModels.Books;assembly=GoogleBooksChallenge.Core"
     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-    Title="Search results for"
     x:TypeArguments="viewModels:ItemReaderViewModel">
     <ContentPage.Content>
         <StackLayout>
-            <!--<cookie:CookieWebView
-                HorizontalOptions="FillAndExpand"
-                Source="{Binding SelectedItem.AccessInfo.WebReaderLink}"
-                VerticalOptions="FillAndExpand" />-->
             <controls:CustomWebView
-                x:Name="Reader"
                 HorizontalOptions="FillAndExpand"
+                IsVisible="False"
                 Source="{Binding SelectedItem.AccessInfo.WebReaderLink}"
-                VerticalOptions="FillAndExpand" />
+                VerticalOptions="FillAndExpand">
+                <controls:CustomWebView.IsVisible>
+                    <OnPlatform x:TypeArguments="x:Boolean">
+                        <On Platform="Android" Value="true" />
+                    </OnPlatform>
+                </controls:CustomWebView.IsVisible>
+            </controls:CustomWebView>
+            <hybrid:FormsWebView
+                ContentType="Internet"
+                EnableGlobalCallbacks="True"
+                EnableGlobalHeaders="True"
+                HorizontalOptions="FillAndExpand"
+                IsVisible="False"
+                Source="{Binding SelectedItem.AccessInfo.WebReaderLink}"
+                VerticalOptions="FillAndExpand">
+                <hybrid:FormsWebView.IsVisible>
+                    <OnPlatform x:TypeArguments="x:Boolean">
+                        <On Platform="iOS" Value="true" />
+                    </OnPlatform>
+                </hybrid:FormsWebView.IsVisible>
+            </hybrid:FormsWebView>
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

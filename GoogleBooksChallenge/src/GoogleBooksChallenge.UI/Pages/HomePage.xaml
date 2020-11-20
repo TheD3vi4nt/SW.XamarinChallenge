@@ -3,6 +3,7 @@
     x:Class="GoogleBooksChallenge.UI.Pages.HomePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:res="clr-namespace:GoogleBooksChallenge.UI.Resources"
     xmlns:local="clr-namespace:GoogleBooksChallenge.UI.Pages"
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
     xmlns:viewModels="clr-namespace:GoogleBooksChallenge.Core.ViewModels.Home;assembly=GoogleBooksChallenge.Core"
@@ -15,19 +16,15 @@
                 FontAttributes="Bold"
                 FontSize="Title"
                 HorizontalOptions="CenterAndExpand"
-                Text="Google Books API"
+                Text="{x:Static res:AppResources.HomeTitle}"
                 VerticalOptions="Start" />
-            <Entry Placeholder="Enter text query" Text="{Binding TextQuery}" />
+            <Entry Placeholder="{x:Static res:AppResources.QueryPlaceholder}" Text="{Binding TextQuery}" />
             <Button
                 Margin="16"
+                BackgroundColor="#45d4d9"
+                TextColor="Black"
                 Command="{Binding SearchBooksCommand}"
-                Text="Search" />
-            <ActivityIndicator
-                HeightRequest="50"
-                HorizontalOptions="Center"
-                IsRunning="{Binding IsBusy}"
-                VerticalOptions="Center"
-                WidthRequest="50" />
+                Text="{x:Static res:AppResources.Search}" />
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

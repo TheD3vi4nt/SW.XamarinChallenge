@@ -8,7 +8,7 @@
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
     xmlns:viewModels="clr-namespace:GoogleBooksChallenge.Core.ViewModels.Books;assembly=GoogleBooksChallenge.Core"
     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-    Title="Search results for"
+    Title="{Binding Title}"
     x:TypeArguments="viewModels:SearchResultViewModel">
     <ContentPage.Content>
         <StackLayout Margin="0" Spacing="8">
@@ -43,20 +43,22 @@
                                         Aspect="AspectFit"
                                         ErrorPlaceholder="ic_book"
                                         FadeAnimationEnabled="True"
-                                        HeightRequest="80"
+                                        HeightRequest="60"
+                                        HorizontalOptions="Center"
+                                        Source="ic_book"
+                                        VerticalOptions="Center"
+                                        WidthRequest="60" />
+                                    <ffimage:CachedImage
+                                        Grid.RowSpan="3"
+                                        Grid.Column="0"
+                                        Aspect="AspectFit"
+                                        ErrorPlaceholder="ic_book"
+                                        FadeAnimationEnabled="True"
+                                        HeightRequest="60"
                                         HorizontalOptions="Center"
                                         Source="{Binding VolumeInfo.ImageLinks.Thumbnail}"
                                         VerticalOptions="Center"
-                                        WidthRequest="80">
-                                        <ffimage:CachedImage.Triggers>
-                                            <DataTrigger
-                                                Binding="{Binding VolumeInfo.ImageLinks, TargetNullValue=''}"
-                                                TargetType="ffimage:CachedImage"
-                                                Value="">
-                                                <Setter Property="Source" Value="ic_book" />
-                                            </DataTrigger>
-                                        </ffimage:CachedImage.Triggers>
-                                    </ffimage:CachedImage>
+                                        WidthRequest="60" />
                                     <Label
                                         Grid.Row="0"
                                         Grid.Column="1"

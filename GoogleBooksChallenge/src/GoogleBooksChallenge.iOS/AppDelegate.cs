@@ -1,6 +1,7 @@
 using Foundation;
 using MvvmCross.Forms.Platforms.Ios.Core;
 using UIKit;
+using Xam.Plugin.WebView.iOS;
 
 namespace GoogleBooksChallenge.iOS
 {
@@ -11,6 +12,7 @@ namespace GoogleBooksChallenge.iOS
         {
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.InitImageSourceHandler();
+            FormsWebViewRenderer.Initialize();
 
             return base.FinishedLaunching(uiApplication, launchOptions);
         }

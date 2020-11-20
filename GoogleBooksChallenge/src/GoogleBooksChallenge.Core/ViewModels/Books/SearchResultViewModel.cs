@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using GoogleBooksChallenge.Core.Contracts;
 using GoogleBooksChallenge.Core.Helpers;
 using GoogleBooksChallenge.Core.Models;
+using GoogleBooksChallenge.Core.Resources;
 using GoogleBooksChallenge.Core.ViewModels.Home;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
@@ -16,6 +17,8 @@ namespace GoogleBooksChallenge.Core.ViewModels.Books
 {
     public class SearchResultViewModel : BaseViewModel<string>
     {
+        public string Title { get; set; }
+
         public string TextQuery { get; set; }
 
         private int _itemTreshold;
@@ -37,10 +40,13 @@ namespace GoogleBooksChallenge.Core.ViewModels.Books
 
         public IMvxCommand RemainingItemsThresholdReachedCommand { get; set; }
 
-        public SearchResultViewModel(IMvxNavigationService navigationService) : base(navigationService)
+        private IDialogService _dialogService { get; set; }
+
+        public SearchResultViewModel(IMvxNavigationService navigationService, IDialogService dialogService) : base(navigationService)
         {
+            _dialogService = dialogService;
             BookDetailCommand = new MvxCommand<Item>(async (i) => await BookDetailAsync(i));
-            RemainingItemsThresholdReachedCommand = new MvxCommand(async () => await RemainingItemsThresholdReachedAsync());
+            RemainingItemsThresholdReachedCommand = new MvxCommand(async () => await RemainingItemsThresholdReachedAsync());            
             ItemTreshold = 3;
         }
 
@@ -56,11 +62,20 @@ namespace GoogleBooksChallenge.Core.ViewModels.Books
 
                 if (queryResponse.Success)
                 {
-                    QueryItems = new ObservableCollection<Item>(queryResponse.Result.Items);
+                    if (queryResponse.Result.TotalItems > 0)
+                    {
+                        QueryItems = new ObservableCollection<Item>(queryResponse.Result.Items);
+                    }
+                    else
+                    {
+                        await _dialogService.ShowAlertAsync(AppResources.QueryEmptyResult);
+                        await NavigationService.Close(this);
+                    }
                 }
                 else
                 {
-
+                    await _dialogService.ShowAlertAsync(AppResources.ServiceError);
+                    await NavigationService.Close(this);
                 }
 
                 IsBusy = false;
@@ -111,6 +126,7 @@ namespace GoogleBooksChallenge.Core.ViewModels.Books
 
         public override void Prepare(string textQuery)
         {
+            Title = AppResources.SearchResultTitle + textQuery;
             TextQuery = textQuery;
         }
     }

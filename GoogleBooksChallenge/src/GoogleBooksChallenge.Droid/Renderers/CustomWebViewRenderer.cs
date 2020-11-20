@@ -23,8 +23,6 @@ namespace GoogleBooksChallenge.Droid.Renderers
 {
     public class CustomWebViewRenderer : WebViewRenderer
     {
-        public CustomWebView CustomWebView => Element as CustomWebView;
-
         public CustomWebViewRenderer(Context context) : base(context)
         {
         }
@@ -33,52 +31,17 @@ namespace GoogleBooksChallenge.Droid.Renderers
         {
             base.OnElementChanged(e);
 
-            Control.SetWebViewClient(new CustomWebViewClient(CustomWebView));
-        }
-    }
-
-    internal class CustomWebViewClient : WebViewClient
-    {
-        private readonly CustomWebView _customWebView;
-        internal CustomWebViewClient(CustomWebView customWebView)
-        {
-            _customWebView = customWebView;
-        }
-
-        public override void OnPageStarted(Android.Webkit.WebView view, string url, Android.Graphics.Bitmap favicon)
-        {
-            base.OnPageStarted(view, url, favicon);
-
-            _customWebView.OnNavigating(new CookieNavigationEventArgs
+            if (e.NewElement != null)
             {
-                Url = url
-            });
-        }
-
-        public override void OnPageFinished(global::Android.Webkit.WebView view, string url)
-        {
-            var cookieHeader = CookieManager.Instance.GetCookie(url);
-            var cookies = new CookieCollection();
-            var cookiePairs = cookieHeader.Split('&');            
-            UserSettings.CookieContainer.SetCookies(new Uri(url), cookieHeader);
-
-            foreach (var cookiePair in cookiePairs)
-            {
-                var cookiePieces = cookiePair.Split('=');
-                if (cookiePieces[0].Contains(":"))
-                    cookiePieces[0] = cookiePieces[0].Substring(0, cookiePieces[0].IndexOf(":"));
-                cookies.Add(new Cookie
+                if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
                 {
-                    Name = cookiePieces[0],
-                    Value = cookiePieces[1]
-                });                
-
-                _customWebView.OnNavigated(new CookieNavigatedEventArgs
+                    CookieManager.Instance.SetAcceptThirdPartyCookies(Control, true);
+                }
+                else
                 {
-                    Cookies = cookies,
-                    Url = url
-                });
-            }
+                    CookieManager.Instance.SetAcceptCookie(true);
+                }
+            }            
         }
     }
 }

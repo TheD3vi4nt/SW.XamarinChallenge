@@ -13,6 +13,8 @@ using MvvmCross.Forms.Platforms.Android.Views;
 using GoogleBooksChallenge.Core.ViewModels.Main;
 using MvvmCross.Forms.Platforms.Android.Core;
 using GoogleBooksChallenge.Core;
+using Xam.Plugin.WebView.Droid;
+using Acr.UserDialogs;
 
 namespace GoogleBooksChallenge.Droid
 {
@@ -27,6 +29,8 @@ namespace GoogleBooksChallenge.Droid
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             FFImageLoading.Forms.Platform.CachedImageRenderer.InitImageViewHandler();
+            FormsWebViewRenderer.Initialize();
+            UserDialogs.Init(this);
 
             base.OnCreate(bundle);
         }

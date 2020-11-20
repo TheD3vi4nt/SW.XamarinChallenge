@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GoogleBooksChallenge.Core.Contracts;
 using GoogleBooksChallenge.Core.Helpers;
 using GoogleBooksChallenge.Core.Models;
+using GoogleBooksChallenge.Core.Resources;
 using GoogleBooksChallenge.Core.ViewModels.Books;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
@@ -18,8 +19,11 @@ namespace GoogleBooksChallenge.Core.ViewModels.Home
 
         public IMvxCommand SearchBooksCommand { get; set; }
 
-        public HomeViewModel(IMvxNavigationService navigationService) : base(navigationService)
+        private IDialogService _dialogService { get; set; }
+
+        public HomeViewModel(IMvxNavigationService navigationService, IDialogService dialogService) : base(navigationService)
         {
+            _dialogService = dialogService;
             SearchBooksCommand = new MvxCommand(async () => await SearchBooksAsync());
         }
 
@@ -27,9 +31,16 @@ namespace GoogleBooksChallenge.Core.ViewModels.Home
         {
             if (IsNotBusy)
             {
-                IsBusy = true;               
+                IsBusy = true;
 
-                await NavigationService.Navigate<SearchResultViewModel, string>(TextQuery);
+                if (string.IsNullOrEmpty(TextQuery))
+                {
+                    await _dialogService.ShowAlertAsync(AppResources.QueryEmptyError);
+                }
+                else
+                {
+                    await NavigationService.Navigate<SearchResultViewModel, string>(TextQuery);
+                }
 
                 IsBusy = false;
             }           

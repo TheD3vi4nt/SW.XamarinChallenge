@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>Xamarin Challenge</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+   <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="QueryEmptyError" xml:space="preserve">
+    <value>The search cannot be empty</value>
+  </data>
+  <data name="QueryEmptyResult" xml:space="preserve">
+    <value>No books found for your search</value>
+  </data>
+  <data name="ServiceError" xml:space="preserve">
+    <value>Something went wrong. Try again later.</value>
+  </data>
+  <data name="QueryPlaceholder" xml:space="preserve">
+    <value>Enter text query</value>
+  </data>
+  <data name="HomeTitle" xml:space="preserve">
+    <value>Google Books Search API</value>
+  </data>
+   <data name="SearchResultTitle" xml:space="preserve">
+    <value>Search results for </value>
+  </data>
+</root>

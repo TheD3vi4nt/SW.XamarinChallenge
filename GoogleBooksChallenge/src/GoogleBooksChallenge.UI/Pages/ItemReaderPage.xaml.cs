@@ -29,7 +29,7 @@ namespace GoogleBooksChallenge.UI.Pages
             if (Application.Current.MainPage is NavigationPage navigationPage)
             {
                 navigationPage.BarTextColor = Color.White;
-                navigationPage.BarBackgroundColor = (Color)Application.Current.Resources["PrimaryColor"];
+                navigationPage.BarBackgroundColor = Color.FromHex("#f74b50");
             }
         }
     }

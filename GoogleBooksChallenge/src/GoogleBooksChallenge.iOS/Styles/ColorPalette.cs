@@ -5,13 +5,13 @@ namespace GoogleBooksChallenge.iOS.Styles
 {
     public static class ColorPalette
     {
-        public static UIColor Primary => FromHexString("#4c555a");
-        public static UIColor PrimaryDark => FromHexString("#242c31");
-        public static UIColor PrimaryLight => FromHexString("#788187");
+        public static UIColor Primary => FromHexString("#f74b50");
+        public static UIColor PrimaryDark => FromHexString("#f74b50");
+        public static UIColor PrimaryLight => FromHexString("#ffe94f");
 
-        public static UIColor Accent => FromHexString("#24b780");
-        public static UIColor AccentDark => FromHexString("#008653");
-        public static UIColor AccentLight => FromHexString("#64eab0");
+        public static UIColor Accent => FromHexString("#45d4d9");
+        public static UIColor AccentDark => FromHexString("#2d95b5");
+        public static UIColor AccentLight => FromHexString("#45F2D9");
 
         public static UIColor PrimaryText => FromHexString("#000000");
         public static UIColor SecondaryText => FromHexString("#ffffff");
