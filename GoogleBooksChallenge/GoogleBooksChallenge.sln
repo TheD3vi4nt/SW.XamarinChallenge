@@ -11,10 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleBooksChallenge.Droid"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleBooksChallenge.iOS", "src\GoogleBooksChallenge.iOS\GoogleBooksChallenge.iOS.csproj", "{BDB30ADD-34CD-4C19-B143-0CE26EE8FD6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleBooksChallenge.Core.Test", "test\GoogleBooksChallenge.Core.Test\GoogleBooksChallenge.Core.Test.csproj", "{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8513AC5E-1009-4046-8DB5-308215EDA1AF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "!Solution Items", "!Solution Items", "{3A20F574-812D-4170-9510-3A4942A0D63D}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -141,36 +137,11 @@ Global
 		{BDB30ADD-34CD-4C19-B143-0CE26EE8FD6B}.Release|iPhoneSimulator.Deploy.0 = Release|iPhoneSimulator
 		{BDB30ADD-34CD-4C19-B143-0CE26EE8FD6B}.Release|x64.ActiveCfg = Release|iPhone
 		{BDB30ADD-34CD-4C19-B143-0CE26EE8FD6B}.Release|x86.ActiveCfg = Release|iPhone
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Debug|ARM.Build.0 = Debug|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Debug|x64.Build.0 = Debug|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Debug|x86.Build.0 = Debug|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Release|ARM.ActiveCfg = Release|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Release|ARM.Build.0 = Release|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Release|iPhone.Build.0 = Release|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Release|x64.ActiveCfg = Release|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Release|x64.Build.0 = Release|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Release|x86.ActiveCfg = Release|Any CPU
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{4A36A5A4-76D2-4730-ABE1-9ED6077961DC} = {8513AC5E-1009-4046-8DB5-308215EDA1AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AAF4CA7C-056D-47D8-9E4C-96AECA17B849}
