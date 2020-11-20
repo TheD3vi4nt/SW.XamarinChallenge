@@ -41,6 +41,16 @@ namespace GoogleBooksChallenge.Core.Services
         }
 
         /// <summary>
+        /// Get user token
+        /// </summary>
+        /// <param name="login">Login data</param>
+        /// <returns>Token</returns>
+        public async Task<ApiServiceResult<BooksQueryResponse>> GetNextBooksAsync(string query, int lastBook)
+        {
+            return await ExecuteAsync(_booksApi.GetNextBooks(query, lastBook));
+        }
+
+        /// <summary>
         /// Excecute api operation
         /// </summary>
         /// <typeparam name="T"></typeparam>

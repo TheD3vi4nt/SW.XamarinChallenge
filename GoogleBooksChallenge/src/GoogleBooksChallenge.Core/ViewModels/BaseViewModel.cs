@@ -10,6 +10,30 @@ namespace GoogleBooksChallenge.Core.ViewModels
     public abstract class BaseViewModel : MvxViewModel
     {
         /// <summary>
+        /// The app is not busy
+        /// </summary>
+        public bool IsNotBusy => !_isBusy;
+
+        /// <summary>
+        /// The app is busy
+        /// </summary>
+        private bool _isBusy;
+
+        /// <summary>
+        /// The app is busy
+        /// </summary>
+        public bool IsBusy
+        {
+            get => _isBusy;
+
+            set
+            {
+                _isBusy = value;
+                RaisePropertyChanged(() => IsBusy);
+            }
+        }
+
+        /// <summary>
         /// Api service
         /// </summary>
         protected readonly ApiService ApiService;

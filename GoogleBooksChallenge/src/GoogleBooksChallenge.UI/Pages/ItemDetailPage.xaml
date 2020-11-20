@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage
+    x:Class="GoogleBooksChallenge.UI.Pages.ItemDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:local="clr-namespace:GoogleBooksChallenge.UI.Pages"
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+    xmlns:viewModels="clr-namespace:GoogleBooksChallenge.Core.ViewModels.Books;assembly=GoogleBooksChallenge.Core"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    Title="Search results for"
+    x:TypeArguments="viewModels:ItemDetailViewModel">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="16" Spacing="8">
+                <Frame
+                    Margin="8"
+                    BackgroundColor="#f74b50"
+                    CornerRadius="16"
+                    HasShadow="False">
+                    <StackLayout>
+                        <ffimage:CachedImage
+                            Margin="0,0,0,8"
+                            Aspect="AspectFit"                           
+                            ErrorPlaceholder="ic_book"
+                            FadeAnimationEnabled="True"
+                            HeightRequest="250"
+                            HorizontalOptions="Center"
+                            Source="{Binding SelectedItem.VolumeInfo.ImageLinks.Thumbnail}"
+                            VerticalOptions="Center"
+                            WidthRequest="250">
+                            <ffimage:CachedImage.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding SelectedItem.VolumeInfo.ImageLinks, TargetNullValue=''}"
+                                    TargetType="ffimage:CachedImage"
+                                    Value="">
+                                    <Setter Property="Source" Value="ic_book" />
+                                </DataTrigger>
+                            </ffimage:CachedImage.Triggers>
+                            <ffimage:CachedImage.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BookReaderCommand}" CommandParameter="{Binding SelectedItem}"></TapGestureRecognizer>
+                            </ffimage:CachedImage.GestureRecognizers>
+                        </ffimage:CachedImage>
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="Title"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding SelectedItem.VolumeInfo.Title}" />
+                        <Label
+                            Margin="0,0,0,8"
+                            FontSize="Subtitle"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding SelectedItem.VolumeInfo.Subtitle}" />
+                        <StackLayout BindableLayout.ItemsSource="{Binding SelectedItem.VolumeInfo.Authors}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <Label
+                                            FontAttributes="Italic"
+                                            FontSize="Subtitle"
+                                            HorizontalTextAlignment="Center"
+                                            Text="{Binding}" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                            <StackLayout.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding SelectedItem.VolumeInfo.Authors, TargetNullValue=''}"
+                                    TargetType="StackLayout"
+                                    Value="">
+                                    <Setter Property="IsVisible" Value="false" />
+                                </DataTrigger>
+                            </StackLayout.Triggers>
+                        </StackLayout>
+                        <Label
+                            Margin="0,0,0,8"
+                            FontAttributes="Italic"
+                            FontSize="Subtitle"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding SelectedItem.VolumeInfo.PublishDateFormat}" />
+                        <Label FontSize="Default" Text="{Binding SelectedItem.VolumeInfo.Description}" />
+                    </StackLayout>
+                    <!--<Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Path=BindingContext.BookDetailCommand, Source={x:Reference QueryItemsList}}" CommandParameter="{Binding}" />
+                </Frame.GestureRecognizers>-->
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+</views:MvxContentPage>

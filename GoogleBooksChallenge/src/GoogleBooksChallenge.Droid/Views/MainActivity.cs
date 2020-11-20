@@ -25,6 +25,9 @@ namespace GoogleBooksChallenge.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.InitImageViewHandler();
+
             base.OnCreate(bundle);
         }
     }

@@ -8,7 +8,9 @@
   <ItemGroup>
     <PackageReference Include="MvvmCross" Version="7.1.2" />
     <PackageReference Include="MvvmCross.Forms" Version="7.1.2" />
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
+    <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1687" />
   </ItemGroup>
   
   <ItemGroup>
@@ -18,6 +20,12 @@
   <ItemGroup>
     <Compile Update="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\ItemReaderPage.xaml.cs">
+      <DependentUpon>ItemReaderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\ItemDetailPage.xaml.cs">
+      <DependentUpon>ItemDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\SearchResultPage.xaml.cs">
       <DependentUpon>SearchResultPage.xaml</DependentUpon>

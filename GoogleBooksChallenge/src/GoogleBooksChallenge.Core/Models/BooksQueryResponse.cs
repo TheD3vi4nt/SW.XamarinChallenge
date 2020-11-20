@@ -15,5 +15,7 @@ namespace GoogleBooksChallenge.Core.Models
 
         [JsonProperty("items")]
         public Item[] Items { get; set; }
+
+        public string TextQuery { get; set; }
     }
 }

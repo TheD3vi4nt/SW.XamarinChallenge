@@ -3,90 +3,116 @@
     x:Class="GoogleBooksChallenge.UI.Pages.SearchResultPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:local="clr-namespace:GoogleBooksChallenge.UI.Pages"
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
     xmlns:viewModels="clr-namespace:GoogleBooksChallenge.Core.ViewModels.Books;assembly=GoogleBooksChallenge.Core"
     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-    Title="Google Books Challenge"
+    Title="Search results for"
     x:TypeArguments="viewModels:SearchResultViewModel">
     <ContentPage.Content>
-        <StackLayout Margin="16" Spacing="8">
-            <Label
-                FontAttributes="Bold"
-                FontSize="Title"
-                HorizontalOptions="CenterAndExpand"
-                Text="Google Books API"
-                VerticalOptions="Start" />
+        <StackLayout Margin="0" Spacing="8">
             <CollectionView
                 x:Name="QueryItemsList"
-                Margin="0,16"
                 BackgroundColor="Transparent"
-                ItemsSource="{Binding QueryItems}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout ItemSpacing="20" Orientation="Vertical" />
-                </CollectionView.ItemsLayout>
+                ItemsSource="{Binding QueryItems}"
+                RemainingItemsThreshold="{Binding ItemTreshold}"
+                RemainingItemsThresholdReachedCommand="{Binding RemainingItemsThresholdReachedCommand}"
+                VerticalScrollBarVisibility="Always">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame
-                            BackgroundColor="#f74b50"
-                            CornerRadius="16"
-                            HasShadow="False">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image
-                                    Grid.Column="0"
-                                    Grid.RowSpan="2"
-                                    HorizontalOptions="Start"
-                                    Source="{Binding VolumeInfo.ImageLinks.Thumbnail}" />
-                                <Label
-                                    Grid.Column="1"
-                                    Grid.Row="0"
-                                    FontAttributes="Bold"
-                                    FontSize="Medium"
-                                    HorizontalOptions="CenterAndExpand"
-                                    HorizontalTextAlignment="Center"
-                                    Text="{Binding VolumeInfo.Title}" />
-                                <CollectionView
-                                    Grid.Column="1"
-                                    Grid.Row="1"
-                                    Margin="16"
-                                    IsVisible="false"
-                                    VerticalOptions="Start"
-                                    BackgroundColor="Red"
-                                    ItemsSource="{Binding VolumeInfo.Authors}">
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackLayout>
-                                                <Label
-                                                    FontAttributes="Bold"
-                                                    FontSize="Medium"
-                                                    HorizontalOptions="CenterAndExpand"
-                                                    HorizontalTextAlignment="Start"
-                                                    Text="{Binding}" />
-                                            </StackLayout>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                    <CollectionView.Triggers>
-                                        <DataTrigger
-                                            Binding="{Binding VolumeInfo.Authors, TargetNullValue=''}"
-                                            TargetType="CollectionView"
-                                            Value="">
-                                            <Setter Property="IsVisible" Value="false" />
-                                        </DataTrigger>
-                                    </CollectionView.Triggers>
-                                </CollectionView>
-                            </Grid>
-                        </Frame>
+                        <ContentView>
+                            <Frame
+                                Margin="16,8"
+                                BackgroundColor="#f74b50"
+                                CornerRadius="16"
+                                HasShadow="False">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <ffimage:CachedImage
+                                        Grid.RowSpan="3"
+                                        Grid.Column="0"
+                                        Aspect="AspectFit"
+                                        ErrorPlaceholder="ic_book"
+                                        FadeAnimationEnabled="True"
+                                        HeightRequest="80"
+                                        HorizontalOptions="Center"
+                                        Source="{Binding VolumeInfo.ImageLinks.Thumbnail}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="80">
+                                        <ffimage:CachedImage.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding VolumeInfo.ImageLinks, TargetNullValue=''}"
+                                                TargetType="ffimage:CachedImage"
+                                                Value="">
+                                                <Setter Property="Source" Value="ic_book" />
+                                            </DataTrigger>
+                                        </ffimage:CachedImage.Triggers>
+                                    </ffimage:CachedImage>
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Margin="0,0,0,8"
+                                        FontAttributes="Bold"
+                                        FontSize="Large"
+                                        HorizontalOptions="CenterAndExpand"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding VolumeInfo.Title}" />
+                                    <StackLayout
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        BindableLayout.ItemsSource="{Binding VolumeInfo.Authors}">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout>
+                                                    <Label
+                                                        FontAttributes="Italic"
+                                                        FontSize="Subtitle"
+                                                        HorizontalTextAlignment="Center"
+                                                        Text="{Binding}" />
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                        <StackLayout.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding VolumeInfo.Authors, TargetNullValue=''}"
+                                                TargetType="StackLayout"
+                                                Value="">
+                                                <Setter Property="IsVisible" Value="false" />
+                                            </DataTrigger>
+                                        </StackLayout.Triggers>
+                                    </StackLayout>
+                                    <Label
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        FontSize="Subtitle"
+                                        HorizontalOptions="CenterAndExpand"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding VolumeInfo.PublishedDate}" />
+                                </Grid>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.BookDetailCommand, Source={x:Reference QueryItemsList}}" CommandParameter="{Binding}" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </ContentView>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <ActivityIndicator
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsBusy}"
+                VerticalOptions="Center"
+                WidthRequest="50" />
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

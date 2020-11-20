@@ -1,20 +1,29 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GoogleBooksChallenge.Core.Contracts;
 using GoogleBooksChallenge.Core.Helpers;
 using GoogleBooksChallenge.Core.Models;
+using GoogleBooksChallenge.Core.ViewModels.Home;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using Refit;
 
 namespace GoogleBooksChallenge.Core.ViewModels.Books
 {
-    public class SearchResultViewModel : BaseViewModel<BooksQueryResponse>
+    public class SearchResultViewModel : BaseViewModel<string>
     {
         public string TextQuery { get; set; }
+
+        private int _itemTreshold;
+        public int ItemTreshold
+        {
+            get => _itemTreshold;
+            set => SetProperty(ref _itemTreshold, value);
+        }
 
         public ObservableCollection<Item> QueryItems
         {
@@ -26,19 +35,83 @@ namespace GoogleBooksChallenge.Core.ViewModels.Books
 
         public IMvxCommand BookDetailCommand { get; set; }
 
+        public IMvxCommand RemainingItemsThresholdReachedCommand { get; set; }
+
         public SearchResultViewModel(IMvxNavigationService navigationService) : base(navigationService)
         {
-            BookDetailCommand = new MvxCommand(async () => await BookDetailAsync());
+            BookDetailCommand = new MvxCommand<Item>(async (i) => await BookDetailAsync(i));
+            RemainingItemsThresholdReachedCommand = new MvxCommand(async () => await RemainingItemsThresholdReachedAsync());
+            ItemTreshold = 3;
         }
 
-        private Task BookDetailAsync()
+        public override async Task Initialize()
         {
-            throw new NotImplementedException();
+            await base.Initialize();
+
+            if (IsNotBusy)
+            {
+                IsBusy = true;
+
+                var queryResponse = await ApiService.GetBooksAsync(TextQuery);
+
+                if (queryResponse.Success)
+                {
+                    QueryItems = new ObservableCollection<Item>(queryResponse.Result.Items);
+                }
+                else
+                {
+
+                }
+
+                IsBusy = false;
+            }
+            
+        }
+        private async Task RemainingItemsThresholdReachedAsync()
+        {
+            if (IsNotBusy)
+            {
+                IsBusy = true;                
+
+                var newItemsResponse = await ApiService.GetNextBooksAsync(TextQuery, QueryItems.Count());
+
+                if (newItemsResponse.Success)
+                {
+                    if (newItemsResponse.Result.Items != null)
+                    {
+                        foreach (var item in newItemsResponse.Result.Items)
+                        {
+                            QueryItems.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        ItemTreshold = -1;
+                    }                 
+                }
+                else
+                {
+
+                }
+                IsBusy = false;
+            }
         }
 
-        public override void Prepare(BooksQueryResponse parameter)
+        private async Task BookDetailAsync(Item selectedItem)
         {
-            QueryItems = new ObservableCollection<Item>(parameter.Items);
+            if (IsNotBusy)
+            {
+                IsBusy = true;
+
+                await NavigationService.Navigate<ItemDetailViewModel, Item>(selectedItem);
+
+                IsBusy = false;
+            }
+        }
+
+        public override void Prepare(string textQuery)
+        {
+            TextQuery = textQuery;
         }
     }
 }

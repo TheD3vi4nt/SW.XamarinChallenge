@@ -25,16 +25,14 @@ namespace GoogleBooksChallenge.Core.ViewModels.Home
 
         private async Task SearchBooksAsync()
         {
-            var queryResponse = await ApiService.GetBooksAsync(TextQuery);
-
-            if (queryResponse.Success)
+            if (IsNotBusy)
             {
-                await NavigationService.Navigate<SearchResultViewModel, BooksQueryResponse>(queryResponse.Result);
-            }
-            else
-            {
+                IsBusy = true;               
 
-            }
+                await NavigationService.Navigate<SearchResultViewModel, string>(TextQuery);
+
+                IsBusy = false;
+            }           
         }
     }
 }

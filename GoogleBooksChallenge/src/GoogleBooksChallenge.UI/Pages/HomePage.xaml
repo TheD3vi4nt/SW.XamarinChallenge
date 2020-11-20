@@ -12,13 +12,22 @@
     <ContentPage.Content>
         <StackLayout Margin="16,40,16,16" Spacing="8">
             <Label
-                HorizontalOptions="CenterAndExpand"                
-                FontSize="Title"
                 FontAttributes="Bold"
+                FontSize="Title"
+                HorizontalOptions="CenterAndExpand"
                 Text="Google Books API"
                 VerticalOptions="Start" />
-            <Entry Placeholder="Enter text query" Text="{Binding TextQuery}"></Entry>
-            <Button Text="Search" Margin="16" Command="{Binding SearchBooksCommand}"></Button>
+            <Entry Placeholder="Enter text query" Text="{Binding TextQuery}" />
+            <Button
+                Margin="16"
+                Command="{Binding SearchBooksCommand}"
+                Text="Search" />
+            <ActivityIndicator
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsBusy}"
+                VerticalOptions="Center"
+                WidthRequest="50" />
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>
