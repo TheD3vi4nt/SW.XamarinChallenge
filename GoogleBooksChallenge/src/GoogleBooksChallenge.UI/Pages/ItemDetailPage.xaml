@@ -12,12 +12,14 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Margin="16" Spacing="8">
+                <!--Main Frame Book Details-->
                 <Frame
                     Margin="8"
                     BackgroundColor="#f74b50"
                     CornerRadius="16"
                     HasShadow="False">
                     <StackLayout>
+                        <!--Book Image-->
                         <ffimage:CachedImage
                             Aspect="AspectFit"
                             ErrorPlaceholder="ic_book"
@@ -36,6 +38,7 @@
                                 </DataTrigger>
                             </ffimage:CachedImage.Triggers>
                         </ffimage:CachedImage>
+                        <!--Reader Button-->
                         <Button
                             Margin="16,0,16,16"
                             Command="{Binding BookReaderCommand}"
@@ -44,12 +47,14 @@
                             FontSize="Medium"
                             HorizontalOptions="Center"
                             Text="Book reader" />
+                        <!--Book Title-->
                         <Label
                             FontAttributes="Bold"
                             FontSize="Title"
                             HorizontalOptions="CenterAndExpand"
                             HorizontalTextAlignment="Center"
                             Text="{Binding SelectedItem.VolumeInfo.Title}" />
+                        <!--Book Subtitle-->
                         <Label
                             Margin="0,0,0,8"
                             FontSize="Subtitle"
@@ -60,6 +65,7 @@
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout>
+                                        <!--Book Subtitle-->
                                         <Label
                                             FontAttributes="Italic"
                                             FontSize="Subtitle"
@@ -77,6 +83,7 @@
                                 </DataTrigger>
                             </StackLayout.Triggers>
                         </StackLayout>
+                        <!--Book Publish Date-->
                         <Label
                             Margin="0,0,0,8"
                             FontAttributes="Italic"
@@ -86,12 +93,8 @@
                             Text="{Binding SelectedItem.VolumeInfo.PublishDateFormat}" />
                         <Label FontSize="Default" Text="{Binding SelectedItem.VolumeInfo.Description}" />
                     </StackLayout>
-                    <!--<Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding Path=BindingContext.BookDetailCommand, Source={x:Reference QueryItemsList}}" CommandParameter="{Binding}" />
-                </Frame.GestureRecognizers>-->
                 </Frame>
             </StackLayout>
         </ScrollView>
-
     </ContentPage.Content>
 </views:MvxContentPage>

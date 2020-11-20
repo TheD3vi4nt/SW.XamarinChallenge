@@ -34,6 +34,6 @@ namespace GoogleBooksChallenge.Core.Models
         [JsonProperty("language")]
         public string Language { get; set; }
 
-        public string PublishDateFormat => string.Format("{0}, {1}", Publisher, PublishedDate);
+        public string PublishDateFormat => string.Format("{0} {1}", Publisher, PublishedDate);
     }
 }

@@ -17,10 +17,19 @@ namespace GoogleBooksChallenge.Core.ViewModels.Books
 {
     public class SearchResultViewModel : BaseViewModel<string>
     {
+        /// <summary>
+        /// Dynamic title for Navigation Bar
+        /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// Object parameter generated in Home search
+        /// </summary>
         public string TextQuery { get; set; }
 
+        /// <summary>
+        /// Treshold for CollectionView inifinite scrolling
+        /// </summary>
         private int _itemTreshold;
         public int ItemTreshold
         {
@@ -28,18 +37,29 @@ namespace GoogleBooksChallenge.Core.ViewModels.Books
             set => SetProperty(ref _itemTreshold, value);
         }
 
+        /// <summary>
+        /// Collection of Query result Items
+        /// </summary>
+        private ObservableCollection<Item> _queryItems;
         public ObservableCollection<Item> QueryItems
         {
             get => _queryItems;
             set => SetProperty(ref _queryItems, value);
         }
 
-        private ObservableCollection<Item> _queryItems;
-
+        /// <summary>
+        /// Command for Book Detail Page
+        /// </summary>
         public IMvxCommand BookDetailCommand { get; set; }
 
+        /// <summary>
+        /// Command for infinite scrolling logic
+        /// </summary>
         public IMvxCommand RemainingItemsThresholdReachedCommand { get; set; }
 
+        /// <summary>
+        /// Service dependency for Display Alerts
+        /// </summary>
         private IDialogService _dialogService { get; set; }
 
         public SearchResultViewModel(IMvxNavigationService navigationService, IDialogService dialogService) : base(navigationService)
@@ -50,6 +70,10 @@ namespace GoogleBooksChallenge.Core.ViewModels.Books
             ItemTreshold = 3;
         }
 
+        /// <summary>
+        /// ViewModel Init method for API Search response
+        /// </summary>
+        /// <returns></returns>
         public override async Task Initialize()
         {
             await base.Initialize();
@@ -58,6 +82,7 @@ namespace GoogleBooksChallenge.Core.ViewModels.Books
             {
                 IsBusy = true;
 
+                //API Google Books Search initial response for 20 items
                 var queryResponse = await ApiService.GetBooksAsync(TextQuery);
 
                 if (queryResponse.Success)
@@ -82,12 +107,18 @@ namespace GoogleBooksChallenge.Core.ViewModels.Books
             }
             
         }
+
+        /// <summary>
+        /// Method for infinite scrolling logic
+        /// </summary>
+        /// <returns></returns>
         private async Task RemainingItemsThresholdReachedAsync()
         {
             if (IsNotBusy)
             {
                 IsBusy = true;                
 
+                //API Google Books Search response for new books
                 var newItemsResponse = await ApiService.GetNextBooksAsync(TextQuery, QueryItems.Count());
 
                 if (newItemsResponse.Success)
@@ -96,22 +127,29 @@ namespace GoogleBooksChallenge.Core.ViewModels.Books
                     {
                         foreach (var item in newItemsResponse.Result.Items)
                         {
+                            //New book added to Collection
                             QueryItems.Add(item);
                         }
                     }
                     else
                     {
+                        //Negative value indicating to CollectionView that there are no new items
                         ItemTreshold = -1;
                     }                 
                 }
                 else
                 {
-
+                    await _dialogService.ShowAlertAsync(AppResources.ServiceError);
                 }
                 IsBusy = false;
             }
         }
 
+        /// <summary>
+        /// Method for navigation service Book Detail
+        /// </summary>
+        /// <param name="selectedItem"></param>
+        /// <returns></returns>
         private async Task BookDetailAsync(Item selectedItem)
         {
             if (IsNotBusy)
@@ -124,6 +162,10 @@ namespace GoogleBooksChallenge.Core.ViewModels.Books
             }
         }
 
+        /// <summary>
+        /// Method init for ViewModel parameters
+        /// </summary>
+        /// <param name="textQuery"></param>
         public override void Prepare(string textQuery)
         {
             Title = AppResources.SearchResultTitle + textQuery;

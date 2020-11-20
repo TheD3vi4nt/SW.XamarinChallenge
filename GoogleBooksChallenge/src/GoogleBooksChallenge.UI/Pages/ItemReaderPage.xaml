@@ -10,6 +10,7 @@
     x:TypeArguments="viewModels:ItemReaderViewModel">
     <ContentPage.Content>
         <StackLayout>
+            <!--Custom WebView Control for Android-->
             <controls:CustomWebView
                 HorizontalOptions="FillAndExpand"
                 IsVisible="False"
@@ -21,6 +22,7 @@
                     </OnPlatform>
                 </controls:CustomWebView.IsVisible>
             </controls:CustomWebView>
+            <!--Custom WebView for iOS-->
             <hybrid:FormsWebView
                 ContentType="Internet"
                 EnableGlobalCallbacks="True"

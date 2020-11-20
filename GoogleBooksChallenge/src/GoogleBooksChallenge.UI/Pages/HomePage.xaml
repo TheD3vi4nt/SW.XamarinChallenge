@@ -11,17 +11,21 @@
     Title="Google Books Challenge"
     x:TypeArguments="viewModels:HomeViewModel">
     <ContentPage.Content>
+        <!--Main Search Stack-->
         <StackLayout Margin="16,40,16,16" Spacing="8">
+            <!--Home Title-->
             <Label
                 FontAttributes="Bold"
                 FontSize="Title"
                 HorizontalOptions="CenterAndExpand"
                 Text="{x:Static res:AppResources.HomeTitle}"
                 VerticalOptions="Start" />
+            <!--Search Entry-->
             <Entry
                 Margin="16"
                 Placeholder="{x:Static res:AppResources.QueryPlaceholder}"
                 Text="{Binding TextQuery}" />
+            <!--Search Button-->
             <Button
                 Margin="16"
                 BackgroundColor="#45d4d9"

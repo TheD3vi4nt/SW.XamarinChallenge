@@ -16,17 +16,26 @@ namespace GoogleBooksChallenge.Core.ViewModels.Books
 {
     public class ItemDetailViewModel : BaseViewModel<Item>
     {
+        /// <summary>
+        /// Current selected book
+        /// </summary>
         public Item SelectedItem { get; set; }
 
+        /// <summary>
+        /// Command for Book Reader Page
+        /// </summary>
         public IMvxCommand BookReaderCommand { get; set; }
-
-        public IMvxCommand RemainingItemsThresholdReachedCommand { get; set; }
 
         public ItemDetailViewModel(IMvxNavigationService navigationService) : base(navigationService)
         {
             BookReaderCommand = new MvxCommand<Item>(async (i) => await BookReaderAsync(i));
         }
 
+        /// <summary>
+        /// Method for navigation service Book Reader
+        /// </summary>
+        /// <param name="selectedItem"></param>
+        /// <returns></returns>
         private async Task BookReaderAsync(Item selectedItem)
         {
             if (IsNotBusy)
@@ -39,6 +48,10 @@ namespace GoogleBooksChallenge.Core.ViewModels.Books
             }
         }
 
+        /// <summary>
+        /// Method init for ViewModel parameters
+        /// </summary>
+        /// <param name="selectedItem"></param>
         public override void Prepare(Item selectedItem)
         {
             SelectedItem = selectedItem;

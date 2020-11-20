@@ -7,6 +7,9 @@ using Xamarin.Forms;
 
 namespace GoogleBooksChallenge.UI.Controls
 {
+    /// <summary>
+    /// Custom WebView for enabling Cookies 
+    /// </summary>
     public class CustomWebView : WebView
     {
     }

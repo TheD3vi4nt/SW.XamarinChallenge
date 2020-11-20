@@ -31,7 +31,7 @@ namespace GoogleBooksChallenge.Core.Services
         }
 
         /// <summary>
-        /// Get user token
+        /// Get books async
         /// </summary>
         /// <param name="login">Login data</param>
         /// <returns>Token</returns>
@@ -41,7 +41,7 @@ namespace GoogleBooksChallenge.Core.Services
         }
 
         /// <summary>
-        /// Get user token
+        /// Get next books async
         /// </summary>
         /// <param name="login">Login data</param>
         /// <returns>Token</returns>

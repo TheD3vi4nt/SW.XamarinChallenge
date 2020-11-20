@@ -12,6 +12,7 @@
     x:TypeArguments="viewModels:SearchResultViewModel">
     <ContentPage.Content>
         <StackLayout Margin="0" Spacing="8">
+            <!--Main Books Query Collection-->
             <CollectionView
                 x:Name="QueryItemsList"
                 BackgroundColor="Transparent"
@@ -23,6 +24,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <ContentView>
+                            <!--Main Frame Container-->
                             <Frame
                                 Margin="16,8"
                                 BackgroundColor="#f74b50"
@@ -38,6 +40,7 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
+                                    <!--Book Image-->
                                     <ffimage:CachedImage
                                         Grid.RowSpan="3"
                                         Grid.Column="0"
@@ -49,6 +52,7 @@
                                         Source="ic_book"
                                         VerticalOptions="Center"
                                         WidthRequest="60" />
+                                    <!--Default Book Image-->
                                     <ffimage:CachedImage
                                         Grid.RowSpan="3"
                                         Grid.Column="0"
@@ -60,6 +64,7 @@
                                         Source="{Binding VolumeInfo.ImageLinks.Thumbnail}"
                                         VerticalOptions="Center"
                                         WidthRequest="60" />
+                                    <!--Book Title-->
                                     <Label
                                         Grid.Row="0"
                                         Grid.Column="1"
@@ -69,6 +74,7 @@
                                         HorizontalOptions="CenterAndExpand"
                                         HorizontalTextAlignment="Center"
                                         Text="{Binding VolumeInfo.Title}" />
+                                    <!--Book Authors-->
                                     <StackLayout
                                         Grid.Row="1"
                                         Grid.Column="1"
@@ -93,6 +99,7 @@
                                             </DataTrigger>
                                         </StackLayout.Triggers>
                                     </StackLayout>
+                                    <!--Book Publish Date-->
                                     <Label
                                         Grid.Row="2"
                                         Grid.Column="1"
@@ -109,6 +116,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <!--Activity Indicator-->
             <ActivityIndicator
                 HeightRequest="50"
                 HorizontalOptions="Center"

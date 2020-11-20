@@ -15,10 +15,19 @@ namespace GoogleBooksChallenge.Core.ViewModels.Home
 {
     public class HomeViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Query text entered in Home entry
+        /// </summary>
         public string TextQuery { get; set; }
 
+        /// <summary>
+        /// Command for Home search button
+        /// </summary>
         public IMvxCommand SearchBooksCommand { get; set; }
 
+        /// <summary>
+        /// Service dependency for Display Alerts
+        /// </summary>
         private IDialogService _dialogService { get; set; }
 
         public HomeViewModel(IMvxNavigationService navigationService, IDialogService dialogService) : base(navigationService)
@@ -27,6 +36,10 @@ namespace GoogleBooksChallenge.Core.ViewModels.Home
             SearchBooksCommand = new MvxCommand(async () => await SearchBooksAsync());
         }
 
+        /// <summary>
+        /// Initialize search method
+        /// </summary>
+        /// <returns></returns>
         private async Task SearchBooksAsync()
         {
             if (IsNotBusy)
